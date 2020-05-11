@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="container">
-      <h1>Todo list</h1>
+      <h1>Todo list{{aaa}}</h1>
       <input type="text" class="form-control mb-5" v-model="userInput" @keydown.enter="addTodo">
 
       <div class="list-group mb-5">
@@ -25,8 +25,8 @@
 
 <script>
 import Todo from './components/Todo';
+import {mapState} from 'vuex';
 
-store.commit('increment')
 export default {
   name: 'app',
   data() {
@@ -39,7 +39,10 @@ export default {
   computed: {
     nonCompletedTodo() {
       return this.todoList.filter(todo => this.type === 'all' || todo.done === this.type);
-    }
+    },
+    ...mapState({
+      aaa: state => state.count
+    })
   },
   methods: {
     addTodo() {
@@ -58,6 +61,10 @@ export default {
   },
   components: {
     Todo
+  },
+  mounted() {
+    this.$store.commit('increment')
+    console.log(this.$store.state.count)
   }
 }
 </script>
