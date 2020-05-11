@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <div class="container">
-      <h1>Todo list{{aaa}}</h1>
-      <input type="text" class="form-control mb-5" v-model="userInput" @keydown.enter="addTodo">
+      <h1>Todo list{{count}}</h1>
+      <input type="text" class="form-control mb-5" v-model="userInput" @keydown.enter="addTodo" placeholder="" >
 
       <div class="list-group mb-5">
         <template v-for="todo in nonCompletedTodo">
@@ -41,7 +41,7 @@ export default {
       return this.todoList.filter(todo => this.type === 'all' || todo.done === this.type);
     },
     ...mapState({
-      aaa: state => state.count
+      count: state => state.count
     })
   },
   methods: {
